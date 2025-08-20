@@ -25,8 +25,6 @@
 </head>
 <body>
 <div class="container">
-    {{ dump($books) }}
-    {{ dump($categories) }}
     <h2>Категории</h2>
     <table class="list">
         <tr>
@@ -44,12 +42,36 @@
         <tr>
             <th>Название</th>
             <th>Категория</th>
+            <th>Автор</th>
         </tr>
         @foreach($books as $book)
         <tr>
             <td>{{ $book->name }}</td>
             <td>{{ $book->category->name }}</td>
+            <td>
+                @foreach($book->authors as $author)
+                    <div>{{ $author->name }}</div>
+                @endforeach
+            </td>
         </tr>
+        @endforeach
+    </table>
+
+    <h2>Авторы</h2>
+    <table class="list">
+        <tr>
+            <th>Имя</th>
+            <th>Книга</th>
+        </tr>
+        @foreach($authors as $author)
+            <tr>
+                <td>{{ $author->name }}</td>
+                <td>
+                    @foreach($author->books as $book)
+                        <div>{{ $book->name }}</div>
+                    @endforeach
+                </td>
+            </tr>
         @endforeach
     </table>
 </div>
